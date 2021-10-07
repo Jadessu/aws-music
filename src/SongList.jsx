@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import { listSongs } from "./graphql/queries";
+import { Paper, IconButton} from "@material-ui/core"
+import PlayArrowIcon from "@material-ui/icons/PlayArrow"
+import FavoriteIcon from "@material-ui/icons/Favorite"
 
 import React from "react";
-import { AmplifySignOut, withAuthenticator } from "@aws-amplify/ui-react";
 import Amplify, { API, graphqlOperation } from "aws-amplify";
 import "./App.css";
 
@@ -28,7 +30,24 @@ function SongList(){
         <div className = "songList">
             {songs.map((song, idx) => {
                return (
-                   <h1> {song.title}</h1>
+                   <Paper variant="outlined" elevation={2} key={`song${idx}`}>
+                       <div className = "songCard">
+                           <IconButton aria-label="play">
+                               <PlayArrowIcon/>
+                           </IconButton>
+                           <div>
+                               <div className="songTitle">{song.title}</div>
+                               <div className="songOwner">{song.owner}</div>
+                           </div>
+                           <div>
+                               <IconButton aria-label="like">
+                                   <FavoriteIcon/>
+                               </IconButton>
+                               {song.likes}
+                           </div>
+                           <div className="songDescription">{song.description}</div>
+                       </div>
+                   </Paper>
                )
             }) }
         </div>
