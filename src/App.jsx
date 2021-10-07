@@ -16,7 +16,7 @@ function App() {
       <header className="App-header">
         <AmplifySignOut />
         <h2> My Amplify App</h2>
-        <p>This is mu amplify solution to the codebase</p>
+       
       </header>
       <SongList/>
     </div>
