@@ -3,10 +3,12 @@ import { listSongs } from "./graphql/queries";
 import { Paper, IconButton} from "@material-ui/core"
 import PlayArrowIcon from "@material-ui/icons/PlayArrow"
 import FavoriteIcon from "@material-ui/icons/Favorite"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./SongList.css"
 
 import React from "react";
 import Amplify, { API, graphqlOperation } from "aws-amplify";
+import { updateSong} from "./graphql/mutations"
 import "./App.css";
 
 function SongList(){
@@ -41,6 +43,14 @@ function SongList(){
       }
     };
 
+        const toggleSong = async idx => {
+            if (songPlaying === idx){
+                setSongPlaying("")
+                return
+            }
+            setSongPlaying(idx)
+            return
+        }
      useEffect(() => {
        fetchSongs();
      }, []);
@@ -64,6 +74,7 @@ function SongList(){
                                    <FavoriteIcon/>
                                </IconButton>
                                {song.likes}
+                               
                            </div>
                            <div className="songDescription">{song.description}</div>
                        </div>
